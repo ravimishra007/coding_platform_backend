@@ -1,18 +1,34 @@
 import User from '../models/user.model.js';
+import { userValidation } from '../validation/joiValidation.js';
+import jwt from 'jsonwebtoken';
+
 
 // Create User
 export const createUser = async (req, res) => {
+  const { error } = userValidation.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   try {
     const user = new User({
       ...req.body
-        });
+    });
 
     await user.save();
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '960h' }
+    );
+
     res.status(201).json({
       message: 'User created successfully',
-      data: user
+      token
     });
+    console.log("user", user);
   } catch (err) {
+    console.log("err", err);
     res.status(500).send('Error creating user');
   }
 };
