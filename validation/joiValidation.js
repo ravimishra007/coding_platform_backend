@@ -2,6 +2,10 @@ import Joi from 'joi';
 
 // Admin validation schema
 export const adminValidation = Joi.object({
+  clerkId: Joi.string(),
+  firstName: Joi.string(),
+  lastName: Joi.string(),
+  username: Joi.string(),
   name: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
@@ -21,10 +25,29 @@ export const adminValidation = Joi.object({
 // User validation schema
 export const userValidation = Joi.object({
   name: Joi.string().min(3).required(),
-  country: Joi.string().required(),
-  subscription: Joi.string().valid('Free', 'Premium'),
-  joinDate: Joi.date().required(),
-  avatar: Joi.string().uri()
+  firstName: Joi.string().min(2),
+  lastName: Joi.string().min(2),
+  clerkId: Joi.string(),
+  username: Joi.string(),
+  email: Joi.string().email().required(),
+  password: Joi.string(),
+  mobileNo: Joi.string(),
+  role: Joi.string()
+    .valid('admin', 'user')
+    .default('user'),
+  address: Joi.object({
+    addressLine: Joi.string(),
+    city: Joi.string(),
+    state: Joi.string(),
+    country: Joi.string(),
+    pincode: Joi.string()
+  }),
+  assignedRole: Joi.string(),
+  adminRights: Joi.array().items(Joi.string()).required(),
+  subscription: Joi.string()
+    .valid('Free', 'Plan A', 'Plan B', 'Plan C')
+    .default('Free'),
+  avatar: Joi.string()
 });
 
 

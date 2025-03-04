@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const AdminSchema = new mongoose.Schema({
+  clerkId: { type: String, },
+  firstName: { type: String, },
+  lastName: { type: String},
+  username: { type: String },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }, 
@@ -26,4 +30,3 @@ const Admin = mongoose.model('Admin', AdminSchema);
 export default Admin;
 
 
-// foget password ====? verify email ===> res-> token and otp ==> otp page ==> otp >> changes password
