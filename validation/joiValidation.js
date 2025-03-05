@@ -43,7 +43,7 @@ export const userValidation = Joi.object({
     pincode: Joi.string()
   }),
   assignedRole: Joi.string(),
-  adminRights: Joi.array().items(Joi.string()).required(),
+  adminRights: Joi.array().items(Joi.string()),
   subscription: Joi.string()
     .valid('Free', 'Plan A', 'Plan B', 'Plan C')
     .default('Free'),
