@@ -20,7 +20,6 @@ const UserSchema = new mongoose.Schema({
   assignedRole: { type: String },
   adminRights: { 
     type: [String]
-    , required: true 
   },  
 
   subscription: { 
