@@ -15,6 +15,7 @@ import crypto from "crypto";
 
 // Database connection
 import { connectionToDb } from "./config/user.dbConfig.js";
+import allowedOrigins from "./config/allowedOrigins.js";
 
 // Load environment variables
 dotenv.config();
@@ -22,12 +23,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.use(
-  cors({
-    origin: "http://localhost:3000", 
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 // Middleware setup
 app.use(express.json());
