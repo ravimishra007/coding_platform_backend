@@ -30,6 +30,8 @@ app.use(cors({
 
 // Middleware setup
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Base route
 app.get("/", (req, res) => {
