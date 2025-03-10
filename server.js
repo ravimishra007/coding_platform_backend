@@ -15,7 +15,6 @@ import crypto from "crypto";
 
 // Database connection
 import { connectionToDb } from "./config/user.dbConfig.js";
-import allowedOrigins from "./config/allowedOrigins.js";
 
 // Load environment variables
 dotenv.config();
